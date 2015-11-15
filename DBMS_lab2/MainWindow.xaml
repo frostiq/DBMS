@@ -1,0 +1,41 @@
+﻿<Window x:Class="DBMS_lab2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DBMS_lab2"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+
+    <TabControl x:Name="tabControl">
+        <TabItem Header="Queries">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label x:Name="label1" Content="Label" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top"/>
+                <Button x:Name="button1" Content="Выполнить запрос" Width="125" Height="30" Click="button1_Click" Margin="20" HorizontalAlignment="Right"/>
+                <TextBox x:Name="genreTextBox" HorizontalAlignment="Left" Height="22" Margin="142,37,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                <xctk:IntegerUpDown x:Name="levelUpDown" Value="3" Increment="1" Maximum="10" Minimum="0" Height="22" Width="50" Margin="292,37,169,38"/>
+
+                <Label x:Name="label2" Content="Label" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Grid.Row="1"/>
+                <Button x:Name="button2" Content="Выполнить запрос" Width="125" Height="30" Grid.Row="1" Click="button2_Click" Margin="20" HorizontalAlignment="Right"/>
+                <xctk:IntegerUpDown x:Name="yearsUpDown" Value="10" Increment="1" Maximum="100" Minimum="0" Height="22" Width="50" Margin="292,37,169,38" Grid.Row="1"/>
+
+
+                <Label x:Name="label3" Content="Label" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Grid.Row="2"/>
+                <Button x:Name="button3" Content="Выполнить запрос" Width="125" Height="30" Grid.Row="2" Click="button3_Click" Margin="20" HorizontalAlignment="Right"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="DataGrid">
+            <DataGrid x:Name="dataGrid"/>
+        </TabItem>
+    </TabControl>
+</Window>
