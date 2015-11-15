@@ -8,8 +8,8 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    
-        <Window.Resources>
+
+    <Window.Resources>
         <sys:String x:Key="FilmsByGenreLabel">Найти все фильмы, принадлежность которых к определенному жанру, оценена не меньше чем в X баллов</sys:String>
         <sys:String x:Key="LastYearsFilmsLabel">Найти все фильмы, вышедшие на экран за последние X лет</sys:String>
         <sys:String x:Key="ActorAndDirectorLabel">Найти сведения о всех актерах, которые были режиссерами хотя бы одного из фильмов, хранящихся в Вашей видеотеке</sys:String>
@@ -20,7 +20,9 @@
         <TabItem Header="Queries">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -28,34 +30,36 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Label x:Name="label1" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top">
+                <Label x:Name="label1" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3">
                     <Label.Content>
                         <AccessText TextWrapping="Wrap" Text="{StaticResource FilmsByGenreLabel}"/>
                     </Label.Content>
                 </Label>
-                <Button x:Name="button1" Content="{StaticResource ExecuteLabel}" Width="125" Height="30" Click="button1_Click" Margin="20" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-                <TextBox x:Name="genreTextBox" Height="22" Width="120" Margin="20" Text="Драма" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                <xctk:IntegerUpDown x:Name="levelUpDown" Value="3" Increment="1" Maximum="10" Minimum="0" Height="22" Width="50" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <Label Content="Жанр:" FontSize="10" Margin="25,47,42,0" VerticalAlignment="Top" Height="27"/>
+                <TextBox x:Name="genreTextBox" Height="22" Width="120" Margin="10" Text="Драма" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                <Label Content="Мин уровень:" FontSize="10" Margin="48,47,48,0" VerticalAlignment="Top" Height="27" Grid.Column="1"/>
+                <xctk:IntegerUpDown x:Name="levelUpDown" Value="3" Increment="1" Maximum="10" Minimum="0" Height="22" Width="75" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="1"/>
+                <Button x:Name="button1" Content="{StaticResource ExecuteLabel}" Width="125" Height="30" Click="button1_Click" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="2"/>
 
-                <Label x:Name="label2" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Grid.Row="1">
+                <Label x:Name="label2" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="3">
                     <Label.Content>
                         <AccessText TextWrapping="Wrap" Text="{StaticResource LastYearsFilmsLabel}"/>
                     </Label.Content>
                 </Label>
-                <Button x:Name="button2" Content="{StaticResource ExecuteLabel}" Width="125" Height="30" Grid.Row="1" Click="button2_Click" Margin="20" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-                <xctk:IntegerUpDown x:Name="yearsUpDown" Value="10" Increment="1" Maximum="100" Minimum="0" Height="22" Width="50" Margin="20" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <Label Content="Кол-во лет:" FontSize="10" Margin="48,47,48,0" VerticalAlignment="Top" Height="27" Grid.Column="1" Grid.Row="1"/>
+                <xctk:IntegerUpDown x:Name="yearsUpDown" Value="10" Increment="1" Maximum="100" Minimum="0" Height="22" Width="75" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="1" Grid.Column="1"/>
+                <Button x:Name="button2" Content="{StaticResource ExecuteLabel}" Width="125" Height="30" Click="button2_Click" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="1" Grid.Column="2"/>
 
-
-                <Label x:Name="label3" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Grid.Row="2">
+                <Label x:Name="label3" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="3">
                     <Label.Content>
                         <AccessText TextWrapping="Wrap" Text="{StaticResource ActorAndDirectorLabel}"/>
                     </Label.Content>
                 </Label>
-                <Button x:Name="button3" Content="{StaticResource ExecuteLabel}" Width="125" Height="30" Grid.Row="2" Click="button3_Click" Margin="20" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                <Button x:Name="button3" Content="{StaticResource ExecuteLabel}" Width="125" Height="30" Click="button3_Click" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="2" Grid.Column="2"/>
 
-                <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="1"/>
-                <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1"/>
-                <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1"/>
+                <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="1" Grid.ColumnSpan="3"/>
+                <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1" Grid.ColumnSpan="3"/>
+                <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1" Grid.ColumnSpan="3"/>
             </Grid>
         </TabItem>
         <TabItem Header="DataGrid">

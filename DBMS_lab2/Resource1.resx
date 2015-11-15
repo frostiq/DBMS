@@ -118,15 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ActorAndDirectorQuery" xml:space="preserve">
-    <value>SELECT DISTINCT Actor.OriginalName
+    <value>SELECT DISTINCT Actor.Name, Actor.OriginalName
 FROM Actor INNER JOIN Director ON Actor.OriginalName = Director.OriginalName</value>
   </data>
   <data name="FilmsByGenreQuery" xml:space="preserve">
-    <value>SELECT * FROM Film INNER JOIN Film_Genre ON Film.FilmId = Film_Genre.FilmId 
+    <value>SELECT Film.Name, Film_Genre.Name as Genre, Film_Genre.Level
+FROM Film INNER JOIN Film_Genre ON Film.FilmId = Film_Genre.FilmId 
 WHERE Film_Genre.Name = @genre AND Film_Genre.Level &gt;= @level</value>
   </data>
   <data name="LastYearsFilmsQuery" xml:space="preserve">
-    <value>SELECT * FROM Film 
+    <value>SELECT Film.Name, Film.Year FROM Film 
 WHERE YEAR(GETDATE()) - Film.Year &lt; @years</value>
   </data>
 </root>

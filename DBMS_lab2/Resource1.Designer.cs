@@ -61,7 +61,7 @@ namespace DBMS_lab2 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT DISTINCT Actor.OriginalName
+        ///   Looks up a localized string similar to SELECT DISTINCT Actor.Name, Actor.OriginalName
         ///FROM Actor INNER JOIN Director ON Actor.OriginalName = Director.OriginalName.
         /// </summary>
         internal static string ActorAndDirectorQuery {
@@ -71,7 +71,8 @@ namespace DBMS_lab2 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT * FROM Film INNER JOIN Film_Genre ON Film.FilmId = Film_Genre.FilmId 
+        ///   Looks up a localized string similar to SELECT Film.Name, Film_Genre.Name as Genre, Film_Genre.Level
+        ///FROM Film INNER JOIN Film_Genre ON Film.FilmId = Film_Genre.FilmId 
         ///WHERE Film_Genre.Name = @genre AND Film_Genre.Level &gt;= @level.
         /// </summary>
         internal static string FilmsByGenreQuery {
@@ -81,7 +82,7 @@ namespace DBMS_lab2 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT * FROM Film 
+        ///   Looks up a localized string similar to SELECT Film.Name, Film.Year FROM Film 
         ///WHERE YEAR(GETDATE()) - Film.Year &lt; @years.
         /// </summary>
         internal static string LastYearsFilmsQuery {
