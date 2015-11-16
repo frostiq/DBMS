@@ -3,12 +3,13 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using Dapper;
+using System.Collections.Generic;
 
 namespace DBMS_lab2
 {
     public class FilmstoreRepository: IDisposable
     {
-        private readonly IDbConnection connection;
+        private readonly SqlConnection connection;
 
         public FilmstoreRepository(string connectionString)
         {
@@ -29,6 +30,24 @@ namespace DBMS_lab2
         public Task<DataTable> FindActorAndDirector()
         {
             return GetDataTable(connection.ExecuteReaderAsync(Resource1.ActorAndDirectorQuery));
+        }
+
+        public IReadOnlyList<string> GetTables()
+        {
+            List<string> tables = new List<string>();
+            DataTable dt = connection.GetSchema("Tables");
+            foreach (DataRow row in dt.Rows)
+            {
+                string tablename = (string)row[2];
+                tables.Add(tablename);
+            }
+            return tables;
+        }
+
+        public SqlDataAdapter GetDataAdapter(string tableName)
+        {
+            var adapter = new SqlDataAdapter($"SELECT * FROM {tableName}", connection);
+            return adapter;
         }
 
         public void Dispose()

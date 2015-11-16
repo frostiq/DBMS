@@ -65,5 +65,20 @@
         <TabItem Header="DataGrid">
             <DataGrid x:Name="dataGrid"/>
         </TabItem>
+        <TabItem Header="Tables">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="88*"/>
+                    <RowDefinition Height="9*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="108*"/>
+                    <ColumnDefinition Width="403*"/>
+                </Grid.ColumnDefinitions>
+                <ListBox x:Name="metaTables" SelectionChanged="metaTables_SelectionChanged"/>
+                <DataGrid x:Name="tableDataGrid" ItemsSource="{Binding}" Grid.Column="1"/>
+                <Button x:Name="submitButton" Grid.Row="1" Grid.Column="1" Width="100" Margin="3" Content="Сохранить" Click="submitButton_Click" />
+            </Grid>
+        </TabItem>
     </TabControl>
 </Window>

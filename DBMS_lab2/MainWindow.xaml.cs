@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System.Data;
+using System.Data.SqlClient;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace DBMS_lab2
 {
@@ -9,9 +12,13 @@ namespace DBMS_lab2
     {
         private readonly FilmstoreRepository repo = App.Current.Repository;
 
+        private TableService tableService;
+
         public MainWindow()
         {
             InitializeComponent();
+            tableService = new TableService(repo);
+            metaTables.ItemsSource = repo.GetTables();
         }
 
         private async void button1_Click(object sender, RoutedEventArgs e)
@@ -36,6 +43,18 @@ namespace DBMS_lab2
             var data = await repo.FindActorAndDirector();
             dataGrid.ItemsSource = data.DefaultView;
             tabControl.SelectedIndex = 1;
+        }
+
+        private void metaTables_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listBox = (ListBox)sender;
+            var tableName = (string)listBox.SelectedItem;
+            tableDataGrid.DataContext = tableService.GetDataTable(tableName);
+        }
+
+        private void submitButton_Click(object sender, RoutedEventArgs e)
+        {
+            tableService.Update((DataTable)tableDataGrid.DataContext);
         }
     }
 }
