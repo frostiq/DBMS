@@ -3,15 +3,17 @@ using System.Data.SqlClient;
 
 namespace DBMS_lab2
 {
-    public class TableService
+    public class MSSQLTableService : ITableService
     {
-        private FilmstoreRepository repo;
+        private MSSQLFilmstoreRepository repo;
+
+        public IFilmstoreRepository Repo => repo;
 
         private SqlDataAdapter currentAdapter;
 
-        public TableService(FilmstoreRepository _repo)
+        public MSSQLTableService(MSSQLFilmstoreRepository repo)
         {
-            repo = _repo;
+            this.repo = repo;
         }
 
         public DataTable GetDataTable(string tableName)
@@ -27,6 +29,12 @@ namespace DBMS_lab2
         public void Update(DataTable dataTable)
         {
             currentAdapter.Update(dataTable);
+        }
+
+        public void Dispose()
+        {
+            currentAdapter.Dispose();
+            repo.Dispose();
         }
     }
 }

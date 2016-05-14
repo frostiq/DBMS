@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -10,14 +9,15 @@ namespace DBMS_lab2
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly FilmstoreRepository repo = App.Current.Repository;
+        private readonly ITableService service = App.Current.TableService;
 
-        private TableService tableService;
+        private readonly IFilmstoreRepository repo;
+
 
         public MainWindow()
         {
             InitializeComponent();
-            tableService = new TableService(repo);
+            repo = service.Repo;
             metaTables.ItemsSource = repo.GetTables();
         }
 
@@ -49,12 +49,12 @@ namespace DBMS_lab2
         {
             var listBox = (ListBox)sender;
             var tableName = (string)listBox.SelectedItem;
-            tableDataGrid.DataContext = tableService.GetDataTable(tableName);
+            tableDataGrid.DataContext = service.GetDataTable(tableName);
         }
 
         private void submitButton_Click(object sender, RoutedEventArgs e)
         {
-            tableService.Update((DataTable)tableDataGrid.DataContext);
+            service.Update((DataTable)tableDataGrid.DataContext);
         }
     }
 }

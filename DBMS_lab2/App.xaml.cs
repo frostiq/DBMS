@@ -8,15 +8,15 @@ namespace DBMS_lab2
     /// </summary>
     public partial class App : Application
     {
-        private static readonly string connString = ConfigurationManager.ConnectionStrings["MainDb"].ConnectionString;
+        private static readonly string connString = ConfigurationManager.ConnectionStrings["MSSQLDb"].ConnectionString;
 
-        public FilmstoreRepository Repository { get; } = new FilmstoreRepository(connString);
+        public ITableService TableService { get; } =  new MSSQLTableService(new MSSQLFilmstoreRepository(connString));
 
         public static new App Current => Application.Current as App;
 
         private void Application_Exit(object sender, ExitEventArgs e)
         {
-            Repository.Dispose();
+            TableService.Dispose();
         }
     }
 }

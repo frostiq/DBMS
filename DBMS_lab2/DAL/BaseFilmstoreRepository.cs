@@ -1,20 +1,20 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.Common;
 using System.Threading.Tasks;
+
 using Dapper;
-using System.Collections.Generic;
 
-namespace DBMS_lab2
+namespace DBMS_lab2.DAL
 {
-    public class FilmstoreRepository: IDisposable
+    public abstract class BaseFilmstoreRepository : IFilmstoreRepository
     {
-        private readonly SqlConnection connection;
+        private DbConnection connection;
 
-        public FilmstoreRepository(string connectionString)
+        protected BaseFilmstoreRepository(DbConnection connection)
         {
-            connection = new SqlConnection(connectionString);
-            connection.Open();
+            this.connection = connection;
+            this.connection.Open();
         }
 
         public Task<DataTable> FindByGenreAssociationLevel(string genre, int level)
@@ -44,18 +44,6 @@ namespace DBMS_lab2
             return tables;
         }
 
-        public SqlDataAdapter GetDataAdapter(string tableName)
-        {
-            var adapter = new SqlDataAdapter($"SELECT * FROM {tableName}", connection);
-            return adapter;
-        }
-
-        public void Dispose()
-        {
-            connection.Close();
-            connection.Dispose();
-        }
-
         private Task<DataTable> GetDataTable(Task<IDataReader> dataReaderTask)
         {
             return dataReaderTask.ContinueWith(task =>
@@ -67,6 +55,12 @@ namespace DBMS_lab2
                 reader.Dispose();
                 return ret;
             });
+        }
+
+        public void Dispose()
+        {
+            connection.Close();
+            connection.Dispose();
         }
     }
 }
