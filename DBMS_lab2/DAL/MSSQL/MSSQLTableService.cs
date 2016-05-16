@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 
-namespace DBMS_lab2
+namespace DBMS_lab2.DAL.MSSQL
 {
     public class MSSQLTableService : ITableService
     {
@@ -11,9 +11,9 @@ namespace DBMS_lab2
 
         private SqlDataAdapter currentAdapter;
 
-        public MSSQLTableService(MSSQLFilmstoreRepository repo)
+        public MSSQLTableService(string connectionString)
         {
-            this.repo = repo;
+            repo = new MSSQLFilmstoreRepository(connectionString);
         }
 
         public DataTable GetDataTable(string tableName)

@@ -1,10 +1,5 @@
 ﻿using Oracle.ManagedDataAccess.Client;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DBMS_lab2.DAL.Oracle
 {
@@ -16,9 +11,9 @@ namespace DBMS_lab2.DAL.Oracle
 
         private OracleDataAdapter currentAdapter;
 
-        public OracleTableService(OracleFilmstoreRepository repo)
+        public OracleTableService(string connectionString)
         {
-            this.repo = repo;
+            repo = new OracleFilmstoreRepository(connectionString);
         }
 
         public DataTable GetDataTable(string tableName)
